@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body{
-            background-color: black;
-        }
-    </style>
+    <title>Pokemon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <input type="text" placeholder="Input Name or Id " id="pokemon-name">
-    <button onclick="fetchData()">Fetch Pokemon</button>
-    <p id="error-msg" style="color: red;"></p>
+    <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-start p-6">
+  
+  <div class="mb-6">
+    <input id="pokemon-name" type="text" placeholder="Enter Pokémon name"
+      class="px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400" />
+    <button onclick="fetchData()"
+      class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-md">
+      Search
+    </button>
+  </div>
 
-    <br>
-    <img src="" alt="Pokemon image" id="pokemon-image" style="display: none;">
-    <br>
-    <div id="pokemon-card"></div>
+    <p id="error-msg" class="text-red-600 font-semibold mb-4"></p>
+
+
+  <!-- Pokémon Card -->
+  <div id="pokemon-card"   class="max-w-sm mx-auto mt-6 p-6 bg-white rounded-2xl shadow-lg hidden 
+         transform transition hover:scale-105 hover:shadow-2xl">>
+    <img id="pokemon-image" class="w-32 h-32 mx-auto" alt="Pokemon" />
+    <h2 id="pokemon-title" class="text-2xl font-bold text-center mt-4"></h2>
+    <p id="pokemon-id" class="text-gray-600 text-center"></p>
+    <div id="pokemon-types" class="flex justify-center gap-2 mt-3"></div>
+  </div>
     <script src="index.js"></script>
 </body>
 </html>

@@ -37,6 +37,10 @@ function checkinput(){
 
 
 
+
+//Without tailwind
+
+/*
 async function fetchData() {
     try{
         const pokemonName=checkinput();
@@ -60,6 +64,9 @@ async function fetchData() {
 
 
         const data=await response.json()
+
+        
+
         const name=data.name;
         const id=data.id;
         const image=data.sprites.front_default;
@@ -88,13 +95,62 @@ async function fetchData() {
 
             
 
-        //console.log(data);
-        // const pokemonImage=data.sprites.front_default;
-        // const imageElement=document.getElementById("pokemon-image");
-        // imageElement.src=pokemonImage;
-        // imageElement.style.display="block";
+        console.log(data);
+        const pokemonImage=data.sprites.front_default;
+        const imageElement=document.getElementById("pokemon-image");
+        imageElement.src=pokemonImage;
+        imageElement.style.display="block";
     }
     catch(error){
         console.error(error)
     }
+}
+
+*/
+
+
+// With tailwind
+
+async function fetchData() {
+  const input = document.getElementById("pokemon-name").value.toLowerCase().trim();
+  const errorMsg = document.getElementById("error-msg");
+  const card = document.getElementById("pokemon-card");
+  const title = document.getElementById("pokemon-title");
+  const pokeId = document.getElementById("pokemon-id");
+  const image = document.getElementById("pokemon-image");
+  const typesContainer = document.getElementById("pokemon-types");
+
+  errorMsg.textContent = "";
+  card.classList.add("hidden"); // hide before showing new data
+
+  if (!input) {
+    errorMsg.textContent = "⚠️ Please enter a Pokémon name or ID.";
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`);
+    if (!res.ok) throw new Error("Pokémon not found!");
+    const data = await res.json();
+
+    // Fill card content
+    title.textContent = data.name.toUpperCase();
+    pokeId.textContent = `#${data.id}`;
+    image.src = data.sprites.other["official-artwork"].front_default;
+
+    // Pokémon types
+    typesContainer.innerHTML = "";
+    data.types.forEach((t) => {
+      const span = document.createElement("span");
+      span.textContent = t.type.name;
+      span.className =
+        "px-3 py-1 bg-green-200 text-green-800 rounded-full text-sm font-medium";
+      typesContainer.appendChild(span);
+    });
+
+    // Show card
+    card.classList.remove("hidden");
+  } catch (err) {
+    errorMsg.textContent = "❌ Pokémon not found!";
+  }
 }
