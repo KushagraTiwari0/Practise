@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+    </style>
 </head>
 <body>
-    <input type="text" placeholder="Input Name" id="pokemon-name">
+    <input type="text" placeholder="Input Name or Id " id="pokemon-name">
     <button onclick="fetchData()">Fetch Pokemon</button>
+    <p id="error-msg" style="color: red;"></p>
+
     <br>
     <img src="" alt="Pokemon image" id="pokemon-image" style="display: none;">
+    <br>
+    <div id="pokemon-card"></div>
     <script src="index.js"></script>
 </body>
 </html>
