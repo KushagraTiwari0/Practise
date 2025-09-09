@@ -48,8 +48,8 @@
 
 
 // const { error } = require('console');
-const { error } = require('console');
-const fs=require('fs');
+// const { error } = require('console');
+// const fs=require('fs');
 
 // fs.writeFile("File_Testing.txt","Pehli file test ho rhi hai",function(err) {
 //     if(err)
@@ -72,8 +72,28 @@ const fs=require('fs');
 //         console.log("Hogya")
 // });
 
-fs.copyFile("New_File.txt","../CopyPasted2.txt",function (err)
-{
-    if(err) console.error(err);
-    else console.log("Krdiya");
+// fs.copyFile("New_File.txt","../CopyPasted2.txt",function (err)
+// {
+//     if(err) console.error(err);
+//     else console.log("Krdiya");
+// })
+
+
+// const http=require('http');
+
+// const server=http.createServer(function (req,res)
+// {
+//     res.end("Server Running");
+// })
+
+// server.listen(3000);
+
+
+const express=require('express');
+const app=express()
+
+app.get('/',function(req,res){
+    res.send('Chal gya Nodemon se lets see')
 })
+
+app.listen(3000);
