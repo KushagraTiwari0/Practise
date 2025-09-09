@@ -89,11 +89,62 @@
 // server.listen(3000);
 
 
+const { error } = require('console');
 const express=require('express');
 const app=express()
 
-app.get('/',function(req,res){
-    res.send('Chal gya Nodemon se lets see')
+
+const users=[
+    {
+        id:1,
+        name:"Kushagra"
+    },
+    {
+        id:2,
+        name:"Niyati"
+    }
+]
+
+app.get('/user/:id',function(req,res,next)
+{
+    const id=parseInt(req.params.id);
+    const user=users.find(u=>u.id===id)
+
+    if(user)
+    {
+        res.send(`${user.name}`);
+    }
+    else
+    {
+        const err=new Error('User not found');
+        err.status=404;
+        next(err);
+    }
 })
+
+app.use(function(err,req,res,next)
+{
+    console.error(err.stack);
+    res.status(err.status||500).send(err.message);
+});
+
+
+
+// app.use(function(req,res,next)
+// {
+//     console.log("Middleware Check 1");
+//     next();
+// })
+// app.get('/',function(req,res,next){
+//     res.end('Chal rha hai')
+//     return next(new Error("Console pr dikhega"));
+// })
+
+// app.use(function(err,req,res,next)
+// {
+//     console.log(err.stack)
+//     res.status(500).send('Chud gya');
+// })
+
 
 app.listen(3000);
